@@ -50,8 +50,8 @@ store = {}
 # Set your Hugging Face API token and Pinecone API key (replace with actual tokens/keys)
 huggingfacehub_api_token = os.getenv('huggingfacehub_api_token')
 pinecone_api_key = os.getenv('pinecone_api_key')
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-genai.configure(api_key=GOOGLE_API_KEY)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+genai.configure(api_key=GEMINI_API_KEY)
 
 model_name = "sentence-transformers/all-MiniLM-L6-v2"
 
