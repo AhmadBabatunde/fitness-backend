@@ -51,7 +51,6 @@ store = {}
 huggingfacehub_api_token = os.getenv('huggingfacehub_api_token')
 pinecone_api_key = os.getenv('pinecone_api_key')
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-genai.configure(api_key=GEMINI_API_KEY)
 
 model_name = "sentence-transformers/all-MiniLM-L6-v2"
 
@@ -68,7 +67,7 @@ vectorstore = PineconeVectorStore(
 )
 
 # Define the LLM
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", convert_system_message_to_human=True, temperature=0.3)
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", convert_system_message_to_human=True, temperature=0.3, api_key= GEMINI_API_KEY)
 
 # Define the retriever for history-aware retrieval
 retriever = vectorstore.as_retriever()
