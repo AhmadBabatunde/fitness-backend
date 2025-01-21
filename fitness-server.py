@@ -13,8 +13,6 @@ import os
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv(), override=True)
 import os
-# if 'GOOGLE_API_KEY' not in os.environ:
-#     os.environ['GOOGLE_API_KEY'] = "AIzaSyD3MDvzy_AZmkwfixmA8qd8anIUpEw64Dg"
 
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory
