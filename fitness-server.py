@@ -13,6 +13,9 @@ import os
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv(), override=True)
 import os
+# if 'GOOGLE_API_KEY' not in os.environ:
+#     os.environ['GOOGLE_API_KEY'] = "AIzaSyD3MDvzy_AZmkwfixmA8qd8anIUpEw64Dg"
+
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory
 from flask import Flask, request, jsonify
@@ -50,8 +53,8 @@ store = {}
 # Set your Hugging Face API token and Pinecone API key (replace with actual tokens/keys)
 huggingfacehub_api_token = os.getenv('huggingfacehub_api_token')
 pinecone_api_key = os.getenv('pinecone_api_key')
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-#genai.configure(api_key=GOOGLE_API_KEY)
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+genai.configure(api_key=GOOGLE_API_KEY)
 
 model_name = "sentence-transformers/all-MiniLM-L6-v2"
 
