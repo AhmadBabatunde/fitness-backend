@@ -4,7 +4,6 @@ langchain_google_genai
 langchain_huggingface
 langchain_pinecone
 protobuf
-google-generativeai
 langchain-google-genai
 langchain-huggingface
 gunicorn

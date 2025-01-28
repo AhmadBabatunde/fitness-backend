@@ -5,7 +5,6 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder
-import google.generativeai as genai
 from langchain_pinecone import PineconeVectorStore
 import re
 from dotenv import load_dotenv, find_dotenv
@@ -65,10 +64,12 @@ vectorstore = PineconeVectorStore(
 )
 
 # Define the LLM
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", convert_system_message_to_human=True, temperature=0.3, api_key= GEMINI_API_KEY)
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", convert_system_message_to_human=True, 
+                             temperature=0.3, api_key= GEMINI_API_KEY,
+                             stream=True)
 
 # Define the retriever for history-aware retrieval
-retriever = vectorstore.as_retriever()
+retriever = vectorstore.as_retriever(search_kwargs={"top_k": 5})
 history_aware_retriever = create_history_aware_retriever(
     llm, retriever, contextualize_q_prompt, 
 )
@@ -89,7 +90,7 @@ prompt_template = """You are an expert in diet and fitness, providing personaliz
 
     Client's Question: {input}
 
-    Response: Make Recommendations based on the client's queries , based on the context provided and the chat history. Additionally, ask reflective questions to encourage deeper exploration. 
+    Response: Make Recommendations based on the client's queries , based on the context provided and the chat history. Additionally, ask reflective questions to encourage deeper exploration. Ensure that your response is concise and not more than 15 line of text.
 """
 
 history_aware_retriever = create_history_aware_retriever(
@@ -103,7 +104,7 @@ prompt = PromptTemplate(
 )
 
 # Initialize memory
-memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True, k=5)
+memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True, k=3)
 question_answer_chain = create_stuff_documents_chain(llm, prompt)
 rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
 
