@@ -2,7 +2,7 @@ torch!=*
 langchain_community
 langchain_core
 langchain_google_genai
-langchain_huggingface
+sentence_transformers
 langchain_pinecone
 protobuf
 langchain-google-genai
