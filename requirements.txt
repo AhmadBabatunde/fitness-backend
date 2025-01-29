@@ -2,10 +2,9 @@ torch!=*
 langchain_community
 langchain_core
 langchain_google_genai
-sentence_transformers
+langchain_huggingface
 langchain_pinecone
 protobuf
-langchain-google-genai
 langchain-huggingface
 gunicorn
 Flask

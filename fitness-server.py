@@ -1,11 +1,11 @@
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.memory import ConversationBufferMemory
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder
 from langchain_pinecone import PineconeVectorStore
-from sentence_transformers import SentenceTransformer
 import re
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv(), override=True)
@@ -54,7 +54,7 @@ model_name = "sentence-transformers/all-MiniLM-L6-v2"
 
 
 # Initialize embeddings
-embedding_mod = SentenceTransformer(model_name=model_name)
+embedding_mod = HuggingFaceEmbeddings(model_name=model_name)
 
 # Initialize Pinecone
 vectorstore = PineconeVectorStore(
