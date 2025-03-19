@@ -7,3 +7,4 @@ langchain_google_genai==2.1.0
 langchain_huggingface==0.1.2
 langchain_pinecone==0.2.3
 python-dotenv==1.0.1
+gunicorn
